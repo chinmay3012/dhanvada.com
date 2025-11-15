@@ -46,34 +46,43 @@ contactForm.addEventListener('submit', async (e) => {
     const originalBtnText = submitBtn.innerHTML;
     submitBtn.innerHTML = '<span>Sending...</span>';
     submitBtn.disabled = true;
+    formMessage.className = 'form-message';
+    formMessage.textContent = '';
     
     try {
-        // Create mailto link with form data
-        const subject = encodeURIComponent('New Contact Form Submission');
-        const body = encodeURIComponent(
-            `Email: ${email}\n` +
-            `Contact Number: ${phone}\n\n` +
-            `Message:\n${message}`
-        );
-        const mailtoLink = `mailto:mehrotrachinmay4@gmail.com?subject=${subject}&body=${body}`;
+        // Initialize EmailJS if not already initialized
+        // Replace 'YOUR_PUBLIC_KEY' with your Public Key from EmailJS (get it from https://www.emailjs.com/)
+        if (typeof emailjs !== 'undefined') {
+            emailjs.init("YOUR_PUBLIC_KEY"); // Replace with your Public Key
+        }
         
-        // Open email client
-        window.location.href = mailtoLink;
+        // Send email using EmailJS
+        // Replace 'YOUR_SERVICE_ID' and 'YOUR_TEMPLATE_ID' with your actual IDs from EmailJS
+        const templateParams = {
+            from_email: email,
+            phone: phone,
+            message: message,
+            to_email: 'rk@dhanvada.com'
+        };
+        
+        await emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams);
         
         // Show success message
-        formMessage.textContent = 'Thank you! Your email client should open. If it doesn\'t, please email us directly at mehrotrachinmay4@gmail.com';
+        formMessage.textContent = "We'll contact you shortly";
         formMessage.className = 'form-message success';
         
-        // Reset form after a delay
+        // Reset form
+        contactForm.reset();
+        
+        // Hide message after 5 seconds
         setTimeout(() => {
-            contactForm.reset();
             formMessage.className = 'form-message';
             formMessage.textContent = '';
         }, 5000);
         
     } catch (error) {
         // Show error message
-        formMessage.textContent = 'There was an error. Please email us directly at mehrotrachinmay4@gmail.com';
+        formMessage.textContent = 'There was an error sending your message. Please try again or email us directly at rk@dhanvada.com';
         formMessage.className = 'form-message error';
     } finally {
         // Restore button

@@ -488,9 +488,13 @@ body {
 }
 
 .form-message.success {
-    background: #e8f5e9;
-    color: #2e7d32;
+    background: #4caf50;
+    color: #ffffff;
     display: block;
+    font-weight: 500;
+    padding: 18px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(76, 175, 80, 0.3);
 }
 
 .form-message.error {
