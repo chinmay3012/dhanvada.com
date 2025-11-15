@@ -55,13 +55,13 @@ contactForm.addEventListener('submit', async (e) => {
             `Contact Number: ${phone}\n\n` +
             `Message:\n${message}`
         );
-        const mailtoLink = `mailto:rk@dhanvada.com?subject=${subject}&body=${body}`;
+        const mailtoLink = `mailto:mehrotrachinmay4@gmail.com?subject=${subject}&body=${body}`;
         
         // Open email client
         window.location.href = mailtoLink;
         
         // Show success message
-        formMessage.textContent = 'Thank you! Your email client should open. If it doesn\'t, please email us directly at rk@dhanvada.com';
+        formMessage.textContent = 'Thank you! Your email client should open. If it doesn\'t, please email us directly at mehrotrachinmay4@gmail.com';
         formMessage.className = 'form-message success';
         
         // Reset form after a delay
@@ -73,7 +73,7 @@ contactForm.addEventListener('submit', async (e) => {
         
     } catch (error) {
         // Show error message
-        formMessage.textContent = 'There was an error. Please email us directly at rk@dhanvada.com';
+        formMessage.textContent = 'There was an error. Please email us directly at mehrotrachinmay4@gmail.com';
         formMessage.className = 'form-message error';
     } finally {
         // Restore button
